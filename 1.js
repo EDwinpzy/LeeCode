@@ -11,5 +11,6 @@ var twoSum = function(nums, target) {
         loop++;
     }
     return;
+    
 };
 console.log(twoSum([1,2,4,6,6,7,5], 13));
