@@ -1,5 +1,5 @@
 var lengthOfLongestSubstring = function(s) {
-    // 哈希集合，记录每个字符是否出现过
+    // 哈希集合（哈希表的一种），记录每个字符是否出现过
     const occ = new Set();
     const n = s.length;
     // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
