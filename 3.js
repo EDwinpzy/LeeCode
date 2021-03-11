@@ -19,3 +19,5 @@ var lengthOfLongestSubstring = function(s) {
     }
     return ans;
 };
+let ans = lengthOfLongestSubstring("sahjkdiuxshjjd");
+console.log(ans);
