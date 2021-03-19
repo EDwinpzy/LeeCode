@@ -1,56 +1,29 @@
-let isMatch = function (s, p) {
-    let dp = Array(s.length + 1);
-    for (let i = 0; i < dp.length; i++) {
-        dp[i] = Array(p.length + 1).fill(false)
-    }
-    dp[0][0] = true;
-    for (let i = 1; i < p.length; i++) {
-        if (p.charAt(i) === "*") {
-            dp[0][i + 1] = dp[0][i - 1]
-        }
-    }
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+ var convert = function(s, numRows) {
+  if(numRows == 1)
+      return s;
 
-    for (let i = 0; i < s.length; i++) {
-        for (let j = 0; j < p.length; j++) {
-            if (p.charAt(j) === '.') {
-                dp[i + 1][j + 1] = dp[i][j]
-            }
+  const len = Math.min(s.length, numRows);
+  const rows = [];
+  for(let i = 0; i< len; i++) rows[i] = "";
+  let loc = 0;
+  let down = false;
 
-            if (p.charAt(j) === s.charAt(i)) {
-                dp[i + 1][j + 1] = dp[i][j]
-            }
+  for(const c of s) {
+      rows[loc] += c;
+      if(loc == 0 || loc == numRows - 1)
+          down = !down;
+      loc += down ? 1 : -1;
+  }
 
-            if (p.charAt(j) === '*') {
-                if (p.charAt(j - 1) !== s.charAt(i) && p.charAt(j - 1) !== '.') {
-                    dp[i + 1][j + 1] = dp[i + 1][j - 1]
-                } else {
-                    dp[i + 1][j + 1] = (dp[i + 1][j] || dp[i][j + 1] || dp[i + 1][j - 1])
-                }
-            }
-        }
-    }
-    console.log(typeof(dp[0][0]))
-    return dp[s.length][p.length]
+  let ans = "";
+  for(const row of rows) {
+      ans += row;
+  }
+  return ans;
 };
-isMatch("qdasdds","asd*asd.a");
-
-
-
-
- // 通过递推公式开始填充矩阵
- for(int i = 1; i <= m; i++){
-    for(int j = 1; j <= n; j++){
-        if(p[j - 1] != '*'){
-            dp[i][j] = (s[i - 1] == p[j - 1] || p[j - 1] == '.') && dp[i - 1][j - 1];
-        }
-        else{
-            if(s[i - 1] == p[j - 2] || p[j - 2] == '.'){
-                dp[i][j] = dp[i][j - 1] || dp[i - 1][j];
-                if(j > 1) dp[i][j] = dp[i][j] || dp[i][j - 2];
-            }
-            else{
-                dp[i][j] = dp[i][j - 2];
-            }
-        }
-    }
-}
+console.log(convert('asdassadsa',3))
