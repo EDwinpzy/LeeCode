@@ -17,8 +17,24 @@
  * @param {number} n
  * @return {ListNode}
  */
-var removeNthFromEnd = function(head, n) {
 
+//快慢指针法
+var removeNthFromEnd = function(head, n) {
+    let hare = head, curr = head;
+    while (n--) {
+        hare = hare.next;
+    }
+    while (hare && hare.next) {
+        curr = curr.next;
+        hare = hare.next;
+    }
+    //此时curr指向需要删除节点的前一个结点，hare指向末尾的null
+    if (!hare) {
+        head = head.next;
+    } else {
+        curr.next = curr.next ? curr.next.next : null;
+    }
+    return head;
 };
 // @lc code=end
 
